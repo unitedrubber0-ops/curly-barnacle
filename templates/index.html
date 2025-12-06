@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>🚀 EDI Tools Dashboard</h1>
+<p>Select a tool below to get started:</p>
+<div class="cards">
+  <div class="card">
+    <h3>🗂 Convert HTML → Weekly Excel</h3>
+    <p>Convert your HTML documents into a formatted weekly Excel workbook.</p>
+    <a href="{{ url_for('convert') }}" class="btn-action">Open Tool</a>
+  </div>
+  <div class="card">
+    <h3>📈 Generate Coverage Report</h3>
+    <p>Analyze your schedule and generate a coverage report with conditional formatting.</p>
+    <a href="{{ url_for('coverage') }}" class="btn-action">Open Tool</a>
+  </div>
+  <div class="card">
+    <h3>📊 Compare EDI Fluctuations</h3>
+    <p>Compare multiple EDI snapshots to identify trends and fluctuations.</p>
+    <a href="{{ url_for('fluctuations') }}" class="btn-action">Open Tool</a>
+  </div>
+  <div class="card">
+    <h3>⚠️ Critical Parts Report</h3>
+    <p>Identify and report on critical parts with unmet demand.</p>
+    <a href="{{ url_for('critical_parts') }}" class="btn-action">Open Tool</a>
+  </div>
+</div>
+{% endblock %}

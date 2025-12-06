@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>📈 Coverage Report</h1>
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="schedule_file">Upload your formatted schedule (Excel):</label>
+      <input type="file" name="schedule_file" id="schedule_file" accept=".xlsx,.xlsm" required>
+    </div>
+    <div class="form-group">
+      <label for="sheet_name">Sheet Name (default: Schedule):</label>
+      <input type="text" name="sheet_name" id="sheet_name" placeholder="Schedule" value="Schedule">
+    </div>
+    <div class="form-group">
+      <label for="part_header">Part Column Header (default: PART):</label>
+      <input type="text" name="part_header" id="part_header" placeholder="PART" value="PART">
+    </div>
+    <button type="submit" class="btn-action">Generate Coverage Report</button>
+  </form>
+</div>
+{% endblock %}

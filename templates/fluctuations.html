@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>📊 EDI Fluctuations</h1>
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="edi_files">Upload at least three Excel snapshots:</label>
+      <input type="file" name="edi_files" id="edi_files" multiple accept=".xlsx" required>
+    </div>
+    <button type="submit" class="btn-action">Generate Fluctuation Report</button>
+  </form>
+</div>
+{% endblock %}

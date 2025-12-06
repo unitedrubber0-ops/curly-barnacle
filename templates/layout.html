@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EDI Tools Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="United Rubber Industries" class="logo-img">
+      <h1 class="logo">EDI Tools</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('convert') }}">Convert</a></li>
+      <li><a href="{{ url_for('coverage') }}">Coverage</a></li>
+      <li><a href="{{ url_for('fluctuations') }}">Fluctuations</a></li>
+      <li><a href="{{ url_for('critical_parts') }}">Critical Parts</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

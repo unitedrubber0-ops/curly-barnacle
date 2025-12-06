@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>⚠️ Critical Parts</h1>
+<div class="card">
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="schedule_file">Upload your Excel schedule:</label>
+      <input type="file" name="schedule_file" id="schedule_file" accept=".xlsx,.xlsm" required>
+    </div>
+    <div class="form-group">
+      <label for="sheet_name">Sheet Name (default: Schedule):</label>
+      <input type="text" name="sheet_name" id="sheet_name" placeholder="Schedule" value="Schedule">
+    </div>
+    <div class="form-group">
+      <label for="window_weeks">Window (weeks):</label>
+      <input type="number" name="window_weeks" id="window_weeks" value="8" min="1" required>
+    </div>
+    <button type="submit" class="btn-action">Generate Critical Parts Doc</button>
+  </form>
+</div>
+{% endblock %}

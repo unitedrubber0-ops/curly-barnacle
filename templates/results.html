@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Conversion Result</h1>
+    {% if output_file %}
+    <p>Your file has been successfully processed. You can download it here:</p>
+    <a href="{{ url_for('upload_file', filename=output_file) }}" download>Download Excel File</a>
+    {% else %}
+    <p>There was an error processing your file.</p>
+    {% endif %}
+</body>
+</html>
