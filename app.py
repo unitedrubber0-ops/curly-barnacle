@@ -189,7 +189,7 @@ def apply_conditional_formatting(
                         current_it_pool = 0
                         current_part_status = red
             
-            date_str = req_date.strftime("%Y-%m-%d")
+            date_str = req_date.strftime("%d-%m-%Y")
 
             # Apply Logic to Rows
             for r in rows:
