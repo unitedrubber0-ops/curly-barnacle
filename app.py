@@ -161,7 +161,7 @@ def apply_conditional_formatting(
         
         # Track First Dates (Part Level or Row Level - User asked for Row Level dates)
         # We will track first occurrences for each row individually
-        row_dates = {r: {'G': None, 'Y': None, 'R': None} for r in rows}
+        row_dates = {r: {'Y': None, 'R': None} for r in rows}
 
         current_part_status = green
 
@@ -207,9 +207,7 @@ def apply_conditional_formatting(
                 cell_colors[r][col_idx] = final_color
 
                 # Capture First Date
-                if final_color == green and row_dates[r]['G'] is None:
-                    row_dates[r]['G'] = date_str
-                elif final_color == yellow and row_dates[r]['Y'] is None:
+                if final_color == yellow and row_dates[r]['Y'] is None:
                     row_dates[r]['Y'] = date_str
                 elif final_color == red and row_dates[r]['R'] is None:
                     row_dates[r]['R'] = date_str
@@ -237,7 +235,6 @@ def apply_conditional_formatting(
         # Save Metadata
         for r in rows:
             row_meta[r] = {
-                'G': row_dates[r]['G'],
                 'Y': row_dates[r]['Y'],
                 'R': row_dates[r]['R'],
                 'cov_wh': wh_months,
@@ -251,11 +248,11 @@ def apply_conditional_formatting(
     else:
         insert_idx = ws.max_column + 1
 
-    # Insert 5 columns: First G, First Y, First R, Cov WH, Cov IT
-    ws.insert_cols(insert_idx, 5)
+    # Insert 4 columns: First Y, First R, Cov WH, Cov IT
+    ws.insert_cols(insert_idx, 4)
 
     # Write Headers
-    titles = ["First Green Date", "First Yellow Date", "First Red Date", "Cov (WH)", "Cov (WH+IT)"]
+    titles = ["First Yellow Date", "First Red Date", "Cov (WH)", "Cov (WH+IT)"]
     for i, t in enumerate(titles):
         c = ws.cell(row=header_row, column=insert_idx + i)
         c.value = t
@@ -266,17 +263,16 @@ def apply_conditional_formatting(
         # A. Write New Columns
         if r in row_meta:
             m = row_meta[r]
-            ws.cell(r, insert_idx).value = m['G'] or "-"
-            ws.cell(r, insert_idx+1).value = m['Y'] or "-"
-            ws.cell(r, insert_idx+2).value = m['R'] or "-"
-            ws.cell(r, insert_idx+3).value = m['cov_wh']
-            ws.cell(r, insert_idx+4).value = m['cov_it']
+            ws.cell(r, insert_idx).value = m['Y'] or "-"
+            ws.cell(r, insert_idx+1).value = m['R'] or "-"
+            ws.cell(r, insert_idx+2).value = m['cov_wh']
+            ws.cell(r, insert_idx+3).value = m['cov_it']
 
-        # B. Color Demand Cells (Shifted by 5)
+        # B. Color Demand Cells (Shifted by 4)
         if r in cell_colors:
             for old_col, color in cell_colors[r].items():
                 # If the column was at or after insertion point, shift it
-                target_col = old_col + 5 if old_col >= insert_idx else old_col
+                target_col = old_col + 4 if old_col >= insert_idx else old_col
                 ws.cell(r, target_col).fill = color
 
     # ── 8. Autofit Columns ────────────────────────────────────────────────────
